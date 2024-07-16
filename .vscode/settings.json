@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["platformer"]
+  "cSpell.words": [
+    "platformer"
+  ],
+  "godotTools.editorPath.godot4": "e:\\Users\\nglar\\Documents\\game design\\engines\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+  "inlineChat.accessibleDiffView": "on",
+  "inlineChat.experimental.textButtons": true
 }

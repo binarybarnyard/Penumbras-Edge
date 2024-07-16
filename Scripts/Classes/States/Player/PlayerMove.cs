@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class PlayerMove : State
+public partial class PlayerMove : PlayerState
 {
 	// Nodes
 	protected Player Player { get; private set; }

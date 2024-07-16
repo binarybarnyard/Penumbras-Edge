@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerJump : State
+public partial class PlayerJump : PlayerState
 {
 	protected Player Player { get; private set; }
 	protected AnimatedSprite2D AnimatedSprite { get; private set; }

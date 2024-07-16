@@ -4,8 +4,11 @@ using test_platformer.Scripts.Interfaces;
 
 public abstract partial class State : Node, IState
 {
+
     //Properties
-    public StateMachine fsm;
+    public new abstract string Name { get; set; }
+
+    public abstract IStateMachine<IState> GetStateMachine();
     // Methods Inherited from IState
     public abstract void Enter();
     public abstract void Exit();
