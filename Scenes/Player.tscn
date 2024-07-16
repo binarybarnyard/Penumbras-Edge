@@ -1,12 +1,12 @@
 [gd_scene load_steps=32 format=3 uid="uid://cyka3f0bldk4q"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_qx2n6"]
-[ext_resource type="Texture2D" uid="uid://ohuxtxs031kh" path="res://Assets/sprites/knight.png" id="2_bptn7"]
-[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="3_tb8x1"]
-[ext_resource type="Script" path="res://Scripts/Player/States/PlayerIdle.cs" id="4_w3qtk"]
-[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMove.cs" id="5_c68br"]
-[ext_resource type="Script" path="res://Scripts/Player/States/PlayerFall.cs" id="6_smvos"]
-[ext_resource type="Script" path="res://Scripts/Player/States/PlayerJump.cs" id="7_v3au4"]
+[ext_resource type="Script" path="res://Scripts/Classes/Player/Player.cs" id="1_qx2n6"]
+[ext_resource type="Texture2D" uid="uid://bt0l52un84o1s" path="res://Assets/sprites/knight.png" id="2_bptn7"]
+[ext_resource type="Script" path="res://Scripts/Classes/StateMachine/StateMachine.cs" id="3_tb8x1"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerIdle.cs" id="4_w3qtk"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerMove.cs" id="5_c68br"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerFall.cs" id="6_smvos"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerJump.cs" id="7_v3au4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bvxy7"]
 atlas = ExtResource("2_bptn7")
