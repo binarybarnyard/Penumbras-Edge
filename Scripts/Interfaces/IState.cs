@@ -11,5 +11,7 @@ namespace test_platformer.Scripts.Interfaces
         void HandleInput(InputEvent @event);
         
         string Name { get; set; }
+        IStateMachine StateMachine { get; set; }
+
     }
 }

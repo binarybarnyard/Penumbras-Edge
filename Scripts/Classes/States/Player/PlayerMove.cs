@@ -1,14 +1,14 @@
 using Godot;
 using System;
 using System.Runtime.CompilerServices;
+using test_platformer.Scripts.Interfaces;
 
 public partial class PlayerMove : PlayerState
 {
-	// Nodes
-	protected Player Player { get; private set; }
-	protected AnimatedSprite2D AnimatedSprite { get; private set; }
+    public override string Name { get; set; } = "walk";
+    public override IStateMachine StateMachine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		Player = GetParent().GetParent<Player>();
 		AnimatedSprite = Player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -46,4 +46,10 @@ public partial class PlayerMove : PlayerState
 			Player._velocity.X = 0;
 		}
 	}
+
+    public override void HandleInput(InputEvent @event)
+    {
+        throw new NotImplementedException();
+    }
+
 }

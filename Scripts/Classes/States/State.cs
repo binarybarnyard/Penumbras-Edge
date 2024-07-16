@@ -7,9 +7,10 @@ public abstract partial class State : Node, IState
 
     //Properties
     public new abstract string Name { get; set; }
+    public abstract IStateMachine StateMachine { get; set; }
 
-    public abstract IStateMachine<IState> GetStateMachine();
     // Methods Inherited from IState
+
     public abstract void Enter();
     public abstract void Exit();
     public abstract void Update(double delta);

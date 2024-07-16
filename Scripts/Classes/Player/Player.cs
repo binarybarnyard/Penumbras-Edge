@@ -11,11 +11,11 @@ public partial class Player : CharacterBody2D
 	// Environment
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-	public StateMachine fsm;
+	public PlayerStateMachine fsm;
 
 	public override void _Ready()
 	{
-		fsm = GetNode<StateMachine>("StateMachine");
+		fsm = GetNode<PlayerStateMachine>("StateMachine");
 	}
 
 	public override void _Process(double delta)
@@ -24,7 +24,7 @@ public partial class Player : CharacterBody2D
 
 		if (direction != Vector2.Zero)
 		{
-			fsm.TransitionTo("PlayerMove");
+			fsm.TransitionTo();
 		}
 
 		else if (Input.IsActionJustPressed("jump") && IsOnFloor())

@@ -1,16 +1,11 @@
 using Godot;
 using System;
+using test_platformer.Scripts.Interfaces;
 
 public partial class PlayerIdle : PlayerState
 {
-	protected Player Player { get; private set; }
-	protected AnimatedSprite2D AnimatedSprite { get; private set; }
-
-	public override void _Ready()
-	{
-		Player = GetParent().GetParent<Player>();
-		AnimatedSprite = Player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-	}
+	public override string Name { get; set; } = "idle";
+	public override IStateMachine StateMachine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 	public override void Enter()
 	{
@@ -23,4 +18,20 @@ public partial class PlayerIdle : PlayerState
 		GD.Print("Exiting Idle state.");
 		AnimatedSprite.Stop();
 	}
+
+	public override void HandleInput(InputEvent @event)
+	{
+		throw new NotImplementedException();
+	}
+
+	public override void PhysicsUpdate(double delta)
+	{
+		throw new NotImplementedException();
+	}
+
+	public override void Update(double delta)
+	{
+		throw new NotImplementedException();
+	}
+
 }

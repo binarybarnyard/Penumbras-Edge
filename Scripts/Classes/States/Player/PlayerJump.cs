@@ -1,10 +1,11 @@
 using Godot;
 using System;
+using test_platformer.Scripts.Interfaces;
 
 public partial class PlayerJump : PlayerState
 {
-	protected Player Player { get; private set; }
-	protected AnimatedSprite2D AnimatedSprite { get; private set; }
+	public override string Name { get; set; } = "jump";
+	public override IStateMachine StateMachine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 	public override void _Ready()
 	{
@@ -26,7 +27,18 @@ public partial class PlayerJump : PlayerState
 	{
 		Player._velocity = Player.GetVelocityInProcess();
 		GD.Print(Player._velocity);
-		
+
 		Player._velocity.Y += Player.JumpVelocity;
 	}
+
+	public override void Update(double delta)
+	{
+		throw new NotImplementedException();
+	}
+
+	public override void HandleInput(InputEvent @event)
+	{
+		throw new NotImplementedException();
+	}
+
 }

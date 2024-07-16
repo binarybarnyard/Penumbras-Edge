@@ -4,9 +4,11 @@ using test_platformer.Scripts.Interfaces;
 
 public partial class PlayerFall : PlayerState
 {
-    public override string Name { get; set; } = "fall";
+	public override string Name { get; set; } = "fall";
+	public override IStateMachine StateMachine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    public override void _Ready()
+
+	public override void _Ready()
 	{
 		Player = GetParent().GetParent<Player>();
 		AnimatedSprite = Player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -32,18 +34,13 @@ public partial class PlayerFall : PlayerState
 	{
 	}
 
-    public override void PhysicsUpdate(double delta)
-    {
-        Player.GravityForce(delta);
-    }
+	public override void PhysicsUpdate(double delta)
+	{
+		Player.GravityForce(delta);
+	}
 
-    public override IStateMachine<IState> GetStateMachine()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Update(double delta)
-    {
-        throw new NotImplementedException();
-    }
+	public override void Update(double delta)
+	{
+		throw new NotImplementedException();
+	}
 }
