@@ -1,7 +1,20 @@
-[gd_scene load_steps=25 format=3 uid="uid://cyka3f0bldk4q"]
+[gd_scene load_steps=32 format=3 uid="uid://cyka3f0bldk4q"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_2r483"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_qx2n6"]
 [ext_resource type="Texture2D" uid="uid://ohuxtxs031kh" path="res://Assets/sprites/knight.png" id="2_bptn7"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="3_tb8x1"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerIdle.cs" id="4_w3qtk"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMove.cs" id="5_c68br"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerFall.cs" id="6_smvos"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerJump.cs" id="7_v3au4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvxy7"]
+atlas = ExtResource("2_bptn7")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s0g8"]
+atlas = ExtResource("2_bptn7")
+region = Rect2(96, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_25e78"]
 atlas = ExtResource("2_bptn7")
@@ -87,6 +100,17 @@ region = Rect2(224, 64, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_bvxy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s0g8")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_25e78")
 }, {
 "duration": 1.0,
@@ -166,12 +190,14 @@ size = Vector2(11, 16)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -1)
-script = ExtResource("1_2r483")
+script = ExtResource("1_qx2n6")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nvdya")
 animation = &"jump"
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 4)
@@ -179,3 +205,19 @@ shape = SubResource("RectangleShape2D_a3lns")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.75, 1.75)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_tb8x1")
+InitialState = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="StateMachine"]
+script = ExtResource("4_w3qtk")
+
+[node name="PlayerMove" type="Node" parent="StateMachine"]
+script = ExtResource("5_c68br")
+
+[node name="PlayerFall" type="Node" parent="StateMachine"]
+script = ExtResource("6_smvos")
+
+[node name="PlayerJump" type="Node" parent="StateMachine"]
+script = ExtResource("7_v3au4")
