@@ -9,8 +9,9 @@ namespace test_platformer.Scripts.Interfaces
         void Update(double delta);
         void PhysicsUpdate(double delta);
         void HandleInput(InputEvent @event);
-        
-        string Name { get; set; }
+
+        string Name { get; }
+        string AnimationName { get; }
         IStateMachine StateMachine { get; set; }
 
     }

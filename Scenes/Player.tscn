@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Classes/Player/Player.cs" id="1_qx2n6"]
 [ext_resource type="Texture2D" uid="uid://bt0l52un84o1s" path="res://Assets/sprites/knight.png" id="2_bptn7"]
-[ext_resource type="Script" path="res://Scripts/Classes/StateMachine/StateMachine.cs" id="3_tb8x1"]
+[ext_resource type="Script" path="res://Scripts/Classes/StateMachine/Player/PlayerStateMachine.cs" id="3_i1240"]
 [ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerIdle.cs" id="4_w3qtk"]
 [ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerMove.cs" id="5_c68br"]
 [ext_resource type="Script" path="res://Scripts/Classes/States/Player/PlayerFall.cs" id="6_smvos"]
@@ -206,18 +206,17 @@ shape = SubResource("RectangleShape2D_a3lns")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.75, 1.75)
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_tb8x1")
-InitialState = NodePath("PlayerIdle")
+[node name="PlayerStateMachine" type="Node" parent="."]
+script = ExtResource("3_i1240")
 
-[node name="PlayerIdle" type="Node" parent="StateMachine"]
+[node name="PlayerIdle" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("4_w3qtk")
 
-[node name="PlayerMove" type="Node" parent="StateMachine"]
+[node name="PlayerMove" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("5_c68br")
 
-[node name="PlayerFall" type="Node" parent="StateMachine"]
+[node name="PlayerFall" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_smvos")
 
-[node name="PlayerJump" type="Node" parent="StateMachine"]
+[node name="PlayerJump" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("7_v3au4")

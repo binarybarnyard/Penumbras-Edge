@@ -7,6 +7,7 @@ public abstract partial class State : Node, IState
 
     //Properties
     public new abstract string Name { get; set; }
+    public abstract string AnimationName { get; set; }
     public abstract IStateMachine StateMachine { get; set; }
 
     // Methods Inherited from IState
