@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;
 
 public partial class PlayerMove : State
 {
@@ -17,24 +16,37 @@ public partial class PlayerMove : State
 	public override void Enter()
 	{
 		GD.Print("Entering Move state.");
+		AnimatedSprite.Play("walk");
 	}
 
 	public override void Exit()
 	{
 		GD.Print("Exiting Move state.");
+		AnimatedSprite.Stop();
 	}
 
 	public override void Update(double delta)
 	{
-		AnimatedSprite.Play("walk");
+		// Flip sprite if going left
+		AnimatedSprite.FlipH = Player._velocity.X < 0;
 
-		AnimatedSprite.FlipH = Player.Velocity.X < 0;
+		// Jump State
+		if (Input.IsActionJustPressed("jump"))
+		{
+			fsm.TransitionTo("PlayerJump");
+		}
+
+		// Attack State
+		if (Input.IsActionJustPressed("attack"))
+		{
+			fsm.TransitionTo("PlayerAttack");
+		}
+
 	}
 
 	public override void PhysicsUpdate(double delta)
 	{
 		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
-		GD.Print(Player.GetVelocityInProcess());
 
 		if (input != 0)
 		{
@@ -44,6 +56,11 @@ public partial class PlayerMove : State
 		else
 		{
 			Player._velocity.X = 0;
+			fsm.TransitionTo("PlayerIdle");
 		}
+
+		// Velocity and Move
+		Player.Velocity = Player._velocity;
+		Player.MoveAndSlide();
 	}
 }
