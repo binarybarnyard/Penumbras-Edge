@@ -33,7 +33,9 @@ public partial class PlayerFall : State
 	public override void Update(double delta)
 	{
 		// Flip sprite if going left
-		AnimatedSprite.FlipH = Player._velocity.X < 0;
+		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+		if (input != 0)
+			AnimatedSprite.FlipH = Player._velocity.X < 0;
 
 		// Idle if land on floor
 		if (Player.IsOnFloor())
