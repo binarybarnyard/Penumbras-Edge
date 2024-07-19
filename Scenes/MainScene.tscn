@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=4 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
+[ext_resource type="PackedScene" uid="uid://co52guer2yshi" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -12,3 +13,6 @@ layer_0/tile_data = PackedInt32Array(786433, 65536, 0, 786434, 65536, 0, 786435,
 
 [node name="Player" parent="." instance=ExtResource("2_nv68y")]
 position = Vector2(202, 180)
+
+[node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
+position = Vector2(345, 183)

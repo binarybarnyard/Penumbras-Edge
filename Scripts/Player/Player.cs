@@ -3,6 +3,9 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+	// Stats
+	public int HitPoints = 5;
+
 	// Movement
 	public Vector2 _velocity = Vector2.Zero;
 	public float Speed = 300.0f;
@@ -13,9 +16,30 @@ public partial class Player : CharacterBody2D
 
 	// Objects
 	public StateMachine fsm;
+	public Timer IFrameTimer { get; private set; }  
 
 	public override void _Ready()
 	{
 		fsm = GetNode<StateMachine>("StateMachine");
+		IFrameTimer = GetNode<Timer>("iFrame");
+	}
+
+	public void TakeDamage(int damage)
+	{
+		HitPoints -= damage;
+		GD.Print(HitPoints);
+
+		fsm.TransitionTo("PlayerHit");
+	}
+
+	private void OnIFrameTimeout()
+	{
+		if (HitPoints > 0)
+		{
+			GD.Print("Hitbox enabled.");
+			CollisionLayer = 1;
+		}
+
+		fsm.TransitionTo("PlayerIdle");
 	}
 }
