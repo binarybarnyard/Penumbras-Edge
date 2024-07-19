@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cyka3f0bldk4q"]
+[gd_scene load_steps=50 format=3 uid="uid://cyka3f0bldk4q"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_qx2n6"]
 [ext_resource type="Texture2D" uid="uid://dvcxqfuqtahi0" path="res://Assets/sprites/knight.png" id="2_bptn7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerJump.cs" id="7_v3au4"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerHit.cs" id="8_5vesi"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.cs" id="8_6xk6q"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerDead.cs" id="9_sjrnp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io7ii"]
 size = Vector2(14, 9)
@@ -292,6 +293,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3lns"]
 size = Vector2(11, 16)
 
+[sub_resource type="Animation" id="Animation_n6p2v"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ciu7v"]
+_data = {
+"new_animation": SubResource("Animation_n6p2v")
+}
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -1)
 script = ExtResource("1_qx2n6")
@@ -327,6 +336,9 @@ script = ExtResource("8_6xk6q")
 [node name="PlayerHit" type="Node" parent="StateMachine"]
 script = ExtResource("8_5vesi")
 
+[node name="PlayerDead" type="Node" parent="StateMachine"]
+script = ExtResource("9_sjrnp")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nvdya")
 animation = &"dead"
@@ -342,5 +354,10 @@ one_shot = true
 [node name="PlayerBody" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_a3lns")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ciu7v")
+}
 
 [connection signal="timeout" from="iFrame" to="." method="OnIFrameTimeout"]

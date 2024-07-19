@@ -39,12 +39,12 @@ public partial class PlayerHit : State
 
 	public override void Update(double delta)
 	{
-		// Flip Sprite if left FIXME:
+		// Flip Sprite if left
 		AnimatedSprite.FlipH = Player._velocity.X < 0;
 
 		if (Player.HitPoints <= 0)
 		{
-			// TODO: Dead
+			fsm.TransitionTo("PlayerDead");
 		}
 
 	}
@@ -54,14 +54,8 @@ public partial class PlayerHit : State
 		// Gravity
 		GravityForce(delta);
 
-		// Left/right direction
-		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
-
-		if (input != 0)
-		{
-			Player._velocity.X = Player.Speed * input;
-			Player._velocity.X = Mathf.Clamp(Player._velocity.X, -Player.Speed, Player.Speed);
-		}
+		// Movement
+		HandleMovement();
 		
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
@@ -76,9 +70,24 @@ public partial class PlayerHit : State
 		}
 	}
 
+	public void HandleMovement()
+	{
+		// Left/right direction
+		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+
+		if (input != 0)
+		{
+			Player._velocity.X = Player.Speed * input;
+			Player._velocity.X = Mathf.Clamp(Player._velocity.X, -Player.Speed, Player.Speed);
+		}
+	}
+
 	public void DisplacingForce(int force)
 	{
-		// TODO: Add random X velocity
+		var random = new RandomNumberGenerator();
+		random.Randomize();
+
 		Player._velocity.Y -= force;
+		Player._velocity.X += random.RandiRange(-10, 10);
 	}
 }

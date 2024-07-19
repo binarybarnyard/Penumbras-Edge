@@ -34,12 +34,21 @@ public partial class Player : CharacterBody2D
 
 	private void OnIFrameTimeout()
 	{
+		// Hitbox remains disabled if dead
 		if (HitPoints > 0)
 		{
 			GD.Print("Hitbox enabled.");
 			CollisionLayer = 1;
 		}
 
-		fsm.TransitionTo("PlayerIdle");
+		// State transition after damage
+		if (!IsOnFloor())
+		{
+			fsm.TransitionTo("PlayerFall");
+		}
+		else
+		{
+			fsm.TransitionTo("PlayerIdle");
+		}
 	}
 }
