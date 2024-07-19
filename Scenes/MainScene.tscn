@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=7 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
-[ext_resource type="PackedScene" uid="uid://co52guer2yshi" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
+[ext_resource type="PackedScene" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
+[ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
+[ext_resource type="Script" path="res://Scripts/Interface/Modals/Buttons/CloseButton.cs" id="4_ulyn7"]
+[ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -16,3 +19,28 @@ position = Vector2(202, 180)
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
 position = Vector2(345, 183)
+
+[node name="UI" type="Node" parent="."]
+script = ExtResource("4_ftpqy")
+
+[node name="Canvas" type="CanvasLayer" parent="UI"]
+
+[node name="OptionsMenu" type="PopupMenu" parent="UI/Canvas"]
+initial_position = 1
+size = Vector2i(107, 100)
+visible = true
+allow_search = false
+script = ExtResource("5_n4o0p")
+
+[node name="CloseButton" type="Button" parent="UI/Canvas/OptionsMenu"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"
+script = ExtResource("4_ulyn7")
+
+[connection signal="pressed" from="UI/Canvas/OptionsMenu/CloseButton" to="UI/Canvas/OptionsMenu/CloseButton" method="_pressed"]

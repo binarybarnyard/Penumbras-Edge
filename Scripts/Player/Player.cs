@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D
 
 	// Objects
 	public StateMachine fsm;
-	public Timer IFrameTimer { get; private set; }  
+	public Timer IFrameTimer { get; private set; }
 
 	public override void _Ready()
 	{
@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
+	//To-do: Move to PlayerHit
 	public void TakeDamage(int damage)
 	{
 		HitPoints -= damage;
@@ -31,7 +32,7 @@ public partial class Player : CharacterBody2D
 
 		fsm.TransitionTo("PlayerHit");
 	}
-
+	//To-do: Move to PlayerHit
 	private void OnIFrameTimeout()
 	{
 		// Hitbox remains disabled if dead
