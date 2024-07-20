@@ -8,14 +8,23 @@ public partial class HealthContainer : FlowContainer
 	public PackedScene emptyHeartScene { get; set; }
 	private int totalHearts { get; set; }
 	private int currentHearts { get; set; }
-
 	public override void _Ready()
 	{
-		player = GetNode<Player>("/root/MainScene/Player");
+		// Use GetNode with casting to ensure we get a Player node
+		var playerNode = GetNode<CharacterBody2D>("/root/MainScene/Player");
+		player = playerNode as Player;
+
+		// Check if casting was successful
+		if (player == null)
+		{
+			GD.PrintErr("Error: Player node is not of type Player.");
+			return;
+		}
+
+		GD.Print("Player: " + player);
 		heartScene = GD.Load<PackedScene>("res://Scenes/UI/Hitpoints/FullHealth.tscn");
 		emptyHeartScene = GD.Load<PackedScene>("res://Scenes/UI/Hitpoints/EmptyHealth.tscn");
-		var isConnected = player.Connect("HealthChanged", new Callable(this, nameof(OnHealthChanged)));
-		GD.Print("Signal Connected: " + isConnected);
+		player.HealthChangedEvent += OnHealthChanged;
 		totalHearts = player.TotalHitPoints;
 		currentHearts = player.HitPoints;
 		OnHealthChanged(currentHearts, totalHearts); // Initialize hearts display
@@ -29,27 +38,20 @@ public partial class HealthContainer : FlowContainer
 		{
 			var heartInstance = heartScene.Instantiate<Sprite2D>();
 			heartInstance.Scale = new Vector2(0.15f, 0.15f);
-			// Get the width of the heart sprite to a variable
-			var heartWidth = heartInstance.RegionRect.Size.X * (.15f) + 5;
-			var heartHeight = heartInstance.RegionRect.Size.Y * (.15f) + 5;
-
+			var heartWidth = heartInstance.RegionRect.Size.X * 0.15f + 5;
+			var heartHeight = heartInstance.RegionRect.Size.Y * 0.15f + 5;
 			heartInstance.Position = new Vector2(heartWidth * (i % 10), heartHeight * (i / 10));
-
 			AddChild(heartInstance);
 		}
 
-		if (currentHealth < totalHealth)
+		for (int i = currentHealth; i < totalHealth; i++)
 		{
-			for (int i = currentHealth; i < totalHealth; i++)
-			{
-				var emptyHeart = emptyHeartScene.Instantiate<Sprite2D>();
-				emptyHeart.Scale = new Vector2(0.15f, 0.15f);
-				var heartWidth = emptyHeart.RegionRect.Size.X * (.15f) + 5;
-				var heartHeight = emptyHeart.RegionRect.Size.Y * (.15f) + 5;
-				// 50 100 150 200 250 300 350 400 450 500
-				emptyHeart.Position = new Vector2(heartWidth * (i % 10), heartHeight * (i / 10));
-				AddChild(emptyHeart);
-			}
+			var emptyHeart = emptyHeartScene.Instantiate<Sprite2D>();
+			emptyHeart.Scale = new Vector2(0.15f, 0.15f);
+			var heartWidth = emptyHeart.RegionRect.Size.X * 0.15f + 5;
+			var heartHeight = emptyHeart.RegionRect.Size.Y * 0.15f + 5;
+			emptyHeart.Position = new Vector2(heartWidth * (i % 10), heartHeight * (i / 10));
+			AddChild(emptyHeart);
 		}
 	}
 

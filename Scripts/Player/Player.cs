@@ -15,7 +15,8 @@ public partial class Player : CharacterBody2D
 	public float JumpVelocity = -400.0f;
 
 	[Signal]
-	public delegate void HealthChangedEventHandler(int health);
+	public delegate void HealthChangedEventHandler(int currentHealth, int totalHealth);
+	public event HealthChangedEventHandler HealthChangedEvent;
 
 	// Environment
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -33,14 +34,13 @@ public partial class Player : CharacterBody2D
 	public void TakeDamage(int damage)
 	{
 		HitPoints -= damage;
-		OnHealthChanged(HitPoints);
+		HealthChangedEvent?.Invoke(HitPoints, TotalHitPoints);
 		fsm.TransitionTo("PlayerHit");
 	}
 
-	public void OnHealthChanged(int health)
+	public void OnHealthChanged(int currentHealth, int totalHealth)
 	{
-		GD.Print("Emitting HealthChanged with health: " + health);
-		EmitSignal(nameof(HealthChangedEventHandler), health);
+		EmitSignal(SignalName.HealthChanged, currentHealth, totalHealth);
 	}
 
 	private void OnIFrameTimeout()
