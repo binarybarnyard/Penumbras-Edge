@@ -5,6 +5,7 @@ public partial class Player : CharacterBody2D
 {
 	// Stats
 	public int HitPoints = 5;
+	public int Damage = 1;
 
 	// Movement
 	public Vector2 _velocity = Vector2.Zero;
@@ -24,10 +25,10 @@ public partial class Player : CharacterBody2D
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(int _receivedDamage)
 	{
-		HitPoints -= damage;
-		GD.Print(HitPoints);
+		HitPoints -= _receivedDamage;
+		GD.Print("Player HP: " + HitPoints);
 
 		fsm.TransitionTo("PlayerHit");
 	}

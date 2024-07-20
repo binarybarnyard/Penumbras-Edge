@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerDead.cs" id="9_sjrnp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io7ii"]
-size = Vector2(14, 9)
+size = Vector2(16, 9)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhre2"]
 atlas = ExtResource("2_bptn7")
@@ -309,14 +309,13 @@ metadata/_edit_group_ = true
 [node name="Sword" type="Area2D" parent="."]
 
 [node name="AttackArea" type="CollisionShape2D" parent="Sword"]
-position = Vector2(13, 5.5)
+position = Vector2(16, 5.5)
 shape = SubResource("RectangleShape2D_io7ii")
 disabled = true
 debug_color = Color(0.752843, 0.408514, 0.550854, 0.42)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_tb8x1")
-InitialState = NodePath("PlayerIdle")
 
 [node name="PlayerIdle" type="Node" parent="StateMachine"]
 script = ExtResource("4_w3qtk")

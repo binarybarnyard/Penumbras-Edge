@@ -1,20 +1,12 @@
 using Godot;
 using System;
 
-public partial class Slime : Area2D
+public partial class Slime : GroundEnemy
 {
-	private int damage = 1;
-	
-	private void OnBodyEntered(Node body)
+	public StateMachine fsm;
+
+	public override void _Ready()
 	{
-		GD.Print("Slime! Damage: " + damage);
-		if (body is Player Player)
-		{
-			Player.TakeDamage(damage);
-		}
+		fsm = GetNode<StateMachine>("StateMachine");
 	}
-
 }
-
-
-
