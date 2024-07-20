@@ -4,12 +4,18 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	// Stats
+	[Export]
 	public int HitPoints = 5;
+	[Export]
+	public int TotalHitPoints { get; internal set; } = 15;
 
 	// Movement
 	public Vector2 _velocity = Vector2.Zero;
 	public float Speed = 300.0f;
 	public float JumpVelocity = -400.0f;
+
+	[Signal]
+	public delegate void HealthChangedEventHandler(int health);
 
 	// Environment
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -24,25 +30,27 @@ public partial class Player : CharacterBody2D
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
-	//To-do: Move to PlayerHit
 	public void TakeDamage(int damage)
 	{
 		HitPoints -= damage;
-		GD.Print(HitPoints);
-
+		OnHealthChanged(HitPoints);
 		fsm.TransitionTo("PlayerHit");
 	}
-	//To-do: Move to PlayerHit
+
+	public void OnHealthChanged(int health)
+	{
+		GD.Print("Emitting HealthChanged with health: " + health);
+		EmitSignal(nameof(HealthChangedEventHandler), health);
+	}
+
 	private void OnIFrameTimeout()
 	{
-		// Hitbox remains disabled if dead
 		if (HitPoints > 0)
 		{
 			GD.Print("Hitbox enabled.");
 			CollisionLayer = 1;
 		}
 
-		// State transition after damage
 		if (!IsOnFloor())
 		{
 			fsm.TransitionTo("PlayerFall");
