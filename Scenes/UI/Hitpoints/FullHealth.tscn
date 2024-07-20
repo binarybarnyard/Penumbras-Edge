@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cecd386y8yrjp"]
+
+[ext_resource type="Texture2D" uid="uid://bktvi6ojysoby" path="res://Assets/sprites/heart.png" id="1_e0obx"]
+
+[node name="FullHealth" type="Sprite2D"]
+texture = ExtResource("1_e0obx")
+region_enabled = true
+region_rect = Rect2(0, 128, 320, 288)

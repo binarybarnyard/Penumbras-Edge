@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=7 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
-[ext_resource type="PackedScene" uid="uid://co52guer2yshi" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
+[ext_resource type="PackedScene" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
+[ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
+[ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
+[ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -16,3 +19,27 @@ position = Vector2(202, 180)
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
 position = Vector2(345, 183)
+
+[node name="UI" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_ftpqy")
+
+[node name="Canvas" type="CanvasLayer" parent="UI"]
+process_mode = 3
+
+[node name="OptionsMenu" type="PopupMenu" parent="UI/Canvas"]
+process_mode = 3
+initial_position = 1
+size = Vector2i(107, 100)
+visible = true
+allow_search = false
+script = ExtResource("5_n4o0p")
+
+[node name="HealthContainer" type="HFlowContainer" parent="UI/Canvas"]
+offset_left = 38.0
+offset_top = 33.0
+offset_right = 224.0
+offset_bottom = 73.0
+script = ExtResource("7_6vdid")
+
+[connection signal="HealthChanged" from="Player" to="UI/Canvas/HealthContainer" method="OnHealthChanged"]
