@@ -4,21 +4,20 @@ using System;
 public partial class UI : Node
 {
     // Nodes on the UI
-    private PopupMenu optionsMenu;
+    private OptionsMenu optionsMenu;
+
     public override void _Ready()
     {
-        optionsMenu = GetNode<PopupMenu>("Canvas/OptionsMenu");
+        optionsMenu = GetNode<OptionsMenu>("Canvas/OptionsMenu");
         GD.Print("optionsMenu: " + optionsMenu);
-        optionsMenu.Visible = false;
+        SetProcessInput(true);
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _Process(double delta)
     {
-        if (@event.IsActionPressed("openMenu"))
+        if (Input.IsActionJustPressed("openMenu"))
         {
-            GD.Print("Bang!");
-            optionsMenu.Visible = !optionsMenu.Visible;
-            //Pause the game if the menu is visible
+            optionsMenu.ToggleVisibility();
         }
     }
 }
