@@ -1,11 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://co52guer2yshi"]
+[gd_scene load_steps=29 format=3 uid="uid://co52guer2yshi"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Slime.cs" id="1_d1kxk"]
 [ext_resource type="Texture2D" uid="uid://c0knm4lb8ju3x" path="res://Assets/sprites/slime_green.png" id="1_k5jve"]
-[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="3_djri2"]
+[ext_resource type="PackedScene" uid="uid://c3c1344ddlmmm" path="res://Scenes/GroundEnemyStateMachine.tscn" id="3_b6s5p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpuxf"]
 radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ny8s"]
+radius = 57.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5hyh8"]
 atlas = ExtResource("1_k5jve")
@@ -104,7 +107,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"chase",
-"speed": 12.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -175,32 +178,48 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8xy8h"]
-radius = 5.0
-height = 14.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0d31a"]
+size = Vector2(10, 12)
 
-[node name="Slime" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa5rn"]
+size = Vector2(114, 4)
+
+[node name="Root" type="Node2D"]
+
+[node name="Slime" type="CharacterBody2D" parent="."]
 script = ExtResource("1_d1kxk")
-metadata/_edit_group_ = true
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_djri2")
+[node name="DamageZone" type="Area2D" parent="Slime"]
 
-[node name="DangerZone" type="Area2D" parent="."]
-
-[node name="Attack" type="CollisionShape2D" parent="DangerZone"]
+[node name="Damage" type="CollisionShape2D" parent="Slime/DamageZone"]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_hpuxf")
 debug_color = Color(0.765627, 0.396804, 0.554782, 0.42)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="ThreatZone" type="Area2D" parent="Slime"]
+
+[node name="Threat" type="CollisionShape2D" parent="Slime/ThreatZone"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_6ny8s")
+debug_color = Color(0, 0, 0, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Slime"]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_7ktck")
-animation = &"chase"
-frame_progress = 0.961894
+animation = &"dead"
 
-[node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
-shape = SubResource("CapsuleShape2D_8xy8h")
+[node name="Body" type="CollisionShape2D" parent="Slime"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_0d31a")
 
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[node name="StateMachine" parent="Slime" instance=ExtResource("3_b6s5p")]
+
+[node name="StateTimer" type="Timer" parent="Slime"]
+one_shot = true
+
+[node name="WanderZone" type="Area2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="Wander" type="CollisionShape2D" parent="WanderZone"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_wa5rn")
