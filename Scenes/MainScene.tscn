@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
-[ext_resource type="PackedScene" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
+[ext_resource type="PackedScene" uid="uid://co52guer2yshi" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
 [ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
 [ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
 [ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
@@ -18,7 +18,7 @@ layer_0/tile_data = PackedInt32Array(786433, 65536, 0, 786434, 65536, 0, 786435,
 position = Vector2(202, 180)
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
-position = Vector2(345, 183)
+position = Vector2(342, 191)
 
 [node name="UI" type="Node" parent="."]
 process_mode = 3
@@ -41,5 +41,3 @@ offset_top = 33.0
 offset_right = 224.0
 offset_bottom = 73.0
 script = ExtResource("7_6vdid")
-
-[connection signal="HealthChanged" from="Player" to="UI/Canvas/HealthContainer" method="OnHealthChanged"]

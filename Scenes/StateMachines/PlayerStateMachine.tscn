@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://cef0urt032aqd"]
+
+[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="1_pqes0"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerIdle.cs" id="2_om11x"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMove.cs" id="3_77qst"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerFall.cs" id="4_o0vm3"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerJump.cs" id="5_t7qbt"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.cs" id="6_wkxqe"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerHit.cs" id="7_3v84y"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerDead.cs" id="8_6j4ke"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_pqes0")
+InitialState = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="."]
+script = ExtResource("2_om11x")
+
+[node name="PlayerMove" type="Node" parent="."]
+script = ExtResource("3_77qst")
+
+[node name="PlayerFall" type="Node" parent="."]
+script = ExtResource("4_o0vm3")
+
+[node name="PlayerJump" type="Node" parent="."]
+script = ExtResource("5_t7qbt")
+
+[node name="PlayerAttack" type="Node" parent="."]
+script = ExtResource("6_wkxqe")
+
+[node name="PlayerHit" type="Node" parent="."]
+script = ExtResource("7_3v84y")
+
+[node name="PlayerDead" type="Node" parent="."]
+script = ExtResource("8_6j4ke")

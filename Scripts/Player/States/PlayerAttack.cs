@@ -21,6 +21,8 @@ public partial class PlayerAttack : State
 		AnimatedSprite = Player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		Sword = Player.GetNode<Area2D>("Sword");
 		AttackArea = Sword.GetNode<CollisionShape2D>("AttackArea");
+
+   		Sword.Connect("body_entered", new Callable(this, nameof(OnSwordBodyEntered)));
 	}
 
 	public override void Enter()
@@ -78,15 +80,27 @@ public partial class PlayerAttack : State
 		Player.MoveAndSlide();
 	}
 
+	public void OnSwordBodyEntered(Node body)
+	{
+		GD.Print(body.Name);
+
+		// TODO: Include other enemy classes
+		if (body is GroundEnemy Enemy)
+		{
+			Enemy.TakeDamage(Player.AttackDamage);
+			GD.Print("Enemy damage taken");
+		}
+	}
+
 	public void FlipHitBox()
 	{
 		if (AnimatedSprite.FlipH)
 		{
-			AttackArea.Position = new Vector2(-12.5f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(-16f, AttackArea.Position.Y);
 		}
 		else
 		{
-			AttackArea.Position = new Vector2(12.5f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(16f, AttackArea.Position.Y);
 		}
 	}
 	

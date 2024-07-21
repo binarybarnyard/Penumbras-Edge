@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3c1344ddlmmm"]
+
+[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="1_8wggx"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/GroundIdle.cs" id="2_371r3"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/GroundWander.cs" id="3_epbht"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/GroundChase.cs" id="4_yyfbj"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/GroundHit.cs" id="5_hak3q"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/GroundDead.cs" id="6_mo7w5"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_8wggx")
+InitialState = NodePath("GroundIdle")
+
+[node name="GroundIdle" type="Node" parent="."]
+script = ExtResource("2_371r3")
+
+[node name="GroundWander" type="Node" parent="."]
+script = ExtResource("3_epbht")
+
+[node name="GroundChase" type="Node" parent="."]
+script = ExtResource("4_yyfbj")
+
+[node name="GroundHit" type="Node" parent="."]
+script = ExtResource("5_hak3q")
+
+[node name="GroundDead" type="Node" parent="."]
+script = ExtResource("6_mo7w5")
