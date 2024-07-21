@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Slime.cs" id="1_d1kxk"]
 [ext_resource type="Texture2D" uid="uid://c0knm4lb8ju3x" path="res://Assets/sprites/slime_green.png" id="1_k5jve"]
-[ext_resource type="PackedScene" uid="uid://c3c1344ddlmmm" path="res://Scenes/GroundEnemyStateMachine.tscn" id="3_b6s5p"]
+[ext_resource type="PackedScene" uid="uid://c3c1344ddlmmm" path="res://Scenes/StateMachines/GroundEnemyStateMachine.tscn" id="3_b6s5p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpuxf"]
 radius = 7.07107
@@ -189,6 +189,8 @@ size = Vector2(114, 4)
 [node name="Slime" type="CharacterBody2D" parent="."]
 script = ExtResource("1_d1kxk")
 
+[node name="StateMachine" parent="Slime" instance=ExtResource("3_b6s5p")]
+
 [node name="DamageZone" type="Area2D" parent="Slime"]
 
 [node name="Damage" type="CollisionShape2D" parent="Slime/DamageZone"]
@@ -211,8 +213,6 @@ animation = &"dead"
 [node name="Body" type="CollisionShape2D" parent="Slime"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_0d31a")
-
-[node name="StateMachine" parent="Slime" instance=ExtResource("3_b6s5p")]
 
 [node name="StateTimer" type="Timer" parent="Slime"]
 one_shot = true

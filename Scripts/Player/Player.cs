@@ -8,6 +8,8 @@ public partial class Player : CharacterBody2D
 	public int HitPoints = 5;
 	[Export]
 	public int TotalHitPoints { get; internal set; } = 5;
+	[Export]
+	public int AttackDamage = 1;
 
 	// Movement
 	public Vector2 _velocity = Vector2.Zero;
