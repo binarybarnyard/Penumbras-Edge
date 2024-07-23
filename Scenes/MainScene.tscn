@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=8 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
 [ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
 [ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
+[ext_resource type="Script" path="res://Scripts/Interface/CharacterScreen.cs" id="7_im1xq"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -41,3 +42,17 @@ offset_top = 33.0
 offset_right = 224.0
 offset_bottom = 73.0
 script = ExtResource("7_6vdid")
+
+[node name="CharacterScreen" type="PopupMenu" parent="UI/Canvas"]
+initial_position = 2
+size = Vector2i(300, 300)
+visible = true
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+script = ExtResource("7_im1xq")
+
+[node name="HpLabel" type="Label" parent="UI/Canvas/CharacterScreen"]
+offset_left = 9.0
+offset_top = 97.0
+offset_right = 49.0
+offset_bottom = 120.0
