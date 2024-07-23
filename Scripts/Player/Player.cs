@@ -4,12 +4,14 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	// Stats
-	[Export]
-	public int HitPoints = 5;
-	[Export]
-	public int TotalHitPoints { get; internal set; } = 5;
-	[Export]
-	public int AttackDamage = 1;
+	[Export] public int HitPoints = 5;
+	[Export] public int TotalHitPoints { get; internal set; } = 5;
+	[Export] public int AttackDamage = 1;
+	[Export] public double Sanity = 100;
+	[Export] public double MaxSanity = 100;
+
+	// Statuses
+	public bool Lit = false;
 
 	// Movement
 	public Vector2 _velocity = Vector2.Zero;
@@ -41,8 +43,33 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	public void AdjustSanity()
+	{
+		if (Lit && Sanity < MaxSanity)
+		{
+			Sanity += 0.01;
+		}
+		else if (Lit)
+		{
+			Sanity = MaxSanity;
+		}
+		else if (!Lit && Sanity > 0)
+		{
+			Sanity -= 0.005;
+		}
+		else
+		{
+			Sanity = 0;
+		}
+	}
+
 	public void TakeDamage(int damage)
 	{
+		if (Sanity == 0)
+		{
+			damage = damage * 2;
+		}
+
 		HitPoints -= damage;
 		HealthChangedEvent?.Invoke(HitPoints, TotalHitPoints);
 		fsm.TransitionTo("PlayerHit");

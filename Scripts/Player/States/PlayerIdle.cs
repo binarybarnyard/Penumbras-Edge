@@ -57,6 +57,9 @@ public partial class PlayerIdle : State
 		{
 			fsm.TransitionTo("PlayerMove");
 		}
+
+        // Sanity
+        Player.AdjustSanity();
 	}
 
     public void CheckForDeath()
