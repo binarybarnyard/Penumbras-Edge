@@ -17,8 +17,12 @@ public partial class PlayerIdle : State
 		GD.Print("Entering Idle state.");
 		AnimatedSprite.Play("idle");
 
+        // No moving allowed
 		Player._velocity = Vector2.Zero;
-	}
+
+        // I am numb inside
+        CheckForDeath();
+    }
 
 	public override void Exit()
 	{
@@ -54,4 +58,12 @@ public partial class PlayerIdle : State
 			fsm.TransitionTo("PlayerMove");
 		}
 	}
+
+    public void CheckForDeath()
+    {
+        if (Player.HitPoints < 1)
+        {
+            fsm.TransitionTo("PlayerDead");
+        }
+    }
 }

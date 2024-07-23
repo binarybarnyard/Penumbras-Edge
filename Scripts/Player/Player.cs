@@ -33,6 +33,14 @@ public partial class Player : CharacterBody2D
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
+	public void GravityForce(double delta)
+	{
+		if (!IsOnFloor())
+		{
+			_velocity.Y += Gravity * (float)delta;
+		}
+	}
+
 	public void TakeDamage(int damage)
 	{
 		HitPoints -= damage;
@@ -57,7 +65,7 @@ public partial class Player : CharacterBody2D
 		{
 			fsm.TransitionTo("PlayerFall");
 		}
-		else
+		else if (HitPoints > 0)
 		{
 			fsm.TransitionTo("PlayerIdle");
 		}

@@ -17,6 +17,7 @@ public partial class PlayerFall : State
 	{
 		GD.Print("Entering falling state.");
 		AnimatedSprite.Play("fall");
+        CheckForDeath();
 	}
 
 	public override void Exit()
@@ -66,16 +67,16 @@ public partial class PlayerFall : State
 		}
 
 		// Gravity, Velocity, MoveandSlide
-		GravityForce(delta);
+		Player.GravityForce(delta);
 		Player.Velocity = Player._velocity;
 		Player.MoveAndSlide();
 	}
 
-	public void GravityForce(double delta)
-	{
-		if (!Player.IsOnFloor())
-		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
-		}
-	}
+    public void CheckForDeath()
+    {
+        if (Player.HitPoints < 1)
+        {
+            fsm.TransitionTo("PlayerDead");
+        }
+    }
 }

@@ -34,21 +34,25 @@ public partial class PlayerDead : State
 		GD.Print("Exit dead state");
 	}
 
+	public override void Update(double delta)
+	{
+		if (Player.IsOnFloor())
+		{
+			Player.CollisionMask = 0;
+			Player.CollisionLayer = 0;
+		}
+	}
+
 	public override void PhysicsUpdate(double delta)
 	{		
-		// Gravity
-		GravityForce(delta);
+		// Gravity if not on floor (see update fn)
+		if (Player.CollisionLayer != 0)
+		{
+			Player.GravityForce(delta);
+		}
 		
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
 		Player.MoveAndSlide();
-	}
-
-	public void GravityForce(double delta)
-	{
-		if (!Player.IsOnFloor())
-		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
-		}
 	}
 }
