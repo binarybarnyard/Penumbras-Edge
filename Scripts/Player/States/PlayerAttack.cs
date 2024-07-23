@@ -33,9 +33,6 @@ public partial class PlayerAttack : State
 		// Reset timer
 		TimeInState = 0.0f;
 
-		// Allow for slight movement while attacking
-		Player._velocity.X = Player._velocity.X / 10;
-
 		// Attack animation
 		AnimatedSprite.Play("attack");
 
@@ -58,6 +55,9 @@ public partial class PlayerAttack : State
 		// Flip hitbox if going left
 		FlipHitBox();
 
+		// Can die while attacking
+		CheckForDeath();
+		
 		// Can transition if min time is met
 		if (TimeInState >= MinTimeInState)
 		{
@@ -65,7 +65,7 @@ public partial class PlayerAttack : State
 			{
 				fsm.TransitionTo("PlayerFall");
 			}
-			else
+			else if (Player.HitPoints > 0)
 			{
 				fsm.TransitionTo("PlayerIdle");
 			}
@@ -74,8 +74,11 @@ public partial class PlayerAttack : State
 
 	public override void PhysicsUpdate(double delta)
 	{
+		// Slide to a stop while attacking
+		Player._velocity.X = (float)(Player._velocity.X / 1.15);
+
 		// Gravity, Velocity, MoveandSlide
-		GravityForce(delta);
+		Player.GravityForce(delta);
 		Player.Velocity = Player._velocity;
 		Player.MoveAndSlide();
 	}
@@ -103,12 +106,13 @@ public partial class PlayerAttack : State
 			AttackArea.Position = new Vector2(16f, AttackArea.Position.Y);
 		}
 	}
-	
-	public void GravityForce(double delta)
+
+	public void CheckForDeath()
 	{
-		if (!Player.IsOnFloor())
+		if (Player.HitPoints < 1)
 		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
+			TimeInState += MinTimeInState;
+			fsm.TransitionTo("PlayerDead");
 		}
 	}
 }

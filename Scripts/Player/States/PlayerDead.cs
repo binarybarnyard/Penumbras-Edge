@@ -36,19 +36,9 @@ public partial class PlayerDead : State
 
 	public override void PhysicsUpdate(double delta)
 	{		
-		// Gravity
-		GravityForce(delta);
-		
-		// Apply velocity and move
+		// Gravity, Velocity, MoveAndSlide		
+		Player.GravityForce(delta);
 		Player.Velocity = Player._velocity;
 		Player.MoveAndSlide();
-	}
-
-	public void GravityForce(double delta)
-	{
-		if (!Player.IsOnFloor())
-		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
-		}
 	}
 }
