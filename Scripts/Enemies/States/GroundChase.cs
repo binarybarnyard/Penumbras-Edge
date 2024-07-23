@@ -41,7 +41,7 @@ public partial class GroundChase : State
 				if (body is Player player)
 				{
 					_playerPosition = player.GlobalPosition;
-					return; // Exit after finding the first player
+					return; // Exit after finding the player
 				}
 			}
 		}
@@ -49,6 +49,7 @@ public partial class GroundChase : State
 
 	public override void PhysicsUpdate(double delta)
 	{
+		// Apply Gravity
 		Enemy.GravityForce(delta);
 
 		// Generate direction towards the player position
@@ -59,9 +60,6 @@ public partial class GroundChase : State
 
 		// Set horizontal velocity
 		Enemy._velocity.X = direction.X * Enemy.Speed;
-
-		// Apply gravity to vertical velocity
-		Enemy._velocity.Y += Enemy.Gravity * (float)delta;
 
 		// Move and slide with the calculated velocity
 		Enemy.Velocity = Enemy._velocity;

@@ -34,24 +34,10 @@ public partial class PlayerDead : State
 		GD.Print("Exit dead state");
 	}
 
-	public override void Update(double delta)
-	{
-		if (Player.IsOnFloor())
-		{
-			Player.CollisionMask = 0;
-			Player.CollisionLayer = 0;
-		}
-	}
-
 	public override void PhysicsUpdate(double delta)
 	{		
-		// Gravity if not on floor (see update fn)
-		if (Player.CollisionLayer != 0)
-		{
-			Player.GravityForce(delta);
-		}
-		
-		// Apply velocity and move
+		// Gravity, Velocity, MoveAndSlide		
+		Player.GravityForce(delta);
 		Player.Velocity = Player._velocity;
 		Player.MoveAndSlide();
 	}
