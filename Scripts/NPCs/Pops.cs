@@ -27,6 +27,7 @@ public partial class Pops : CharacterBody
     private string currentAnimation { get; set; }
     private bool animationPlayed { get; set; } = false;
     private bool playerOverlapping { get; set; }
+    private DialogManager dialogManager { get; set; }
 
     // public variables
 
@@ -55,6 +56,8 @@ public partial class Pops : CharacterBody
         GD.Print("Pops is ready!");
         tick.Connect("timeout", new Callable(this, nameof(AnimationCycle)));
         triggerArea.Monitoring = true;
+
+        dialogManager = GetNode<DialogManager>("DialogManager");
     }
 
     public override void _Process(double delta)
@@ -63,6 +66,18 @@ public partial class Pops : CharacterBody
         {
             animatedSprite2D.Play("idle1");
             playerOverlapping = true;
+
+            if (Input.IsActionJustPressed("attack"))
+            {
+                if (dialogManager.isDialogActive)
+                {
+                    dialogManager.OnNextButtonPressed();
+                }
+                else
+                {
+                    dialogManager.StartDialog(new string[] { "What're ya buyin'?", "Hehehe that's a good one, stranjuh.", "I'm just a humble merchant, but I'm sure we can make a deal." });
+                }
+            }
         }
         else
         {

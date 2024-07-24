@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpjlna0wx7qr1"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/DialogManager.cs" id="1_m5xvc"]
+[ext_resource type="Theme" uid="uid://bfu8hvannyve6" path="res://Scenes/UI/Themes/DialogManager.tres" id="1_nfxio"]
+
+[sub_resource type="FontFile" id="FontFile_bttfp"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="Theme" id="Theme_uhhna"]
+default_base_scale = 1.0
+default_font = SubResource("FontFile_bttfp")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pfb2c"]
+
+[node name="DialogManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_nfxio")
+script = ExtResource("1_m5xvc")
+
+[node name="DialogWindow" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+scale = Vector2(0.598724, 0.598724)
+theme = SubResource("Theme_uhhna")
+
+[node name="CurrentText" type="Label" parent="DialogWindow"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("1_nfxio")
+text = "Test..."
+metadata/_edit_use_anchors_ = true
+
+[node name="NextButton" type="Button" parent="DialogWindow"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 166.0
+offset_right = 433.0
+offset_bottom = 197.0
+text = "Next"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(131.25, 59.75)
+scale = Vector2(263.5, 120.5)
+texture = SubResource("PlaceholderTexture2D_pfb2c")
