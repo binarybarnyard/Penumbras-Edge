@@ -49,9 +49,6 @@ public partial class PlayerJump : State
 
 	public override void PhysicsUpdate(double delta)
 	{
-		// Apply Gravity
-		GravityForce(delta);
-
 		// Left/right direction
 		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
 
@@ -67,15 +64,6 @@ public partial class PlayerJump : State
 
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
-		Player.MoveAndSlide();
 
-	}
-
-	public void GravityForce(double delta)
-	{
-		if (!Player.IsOnFloor())
-		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
-		}
 	}
 }

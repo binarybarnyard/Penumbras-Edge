@@ -21,7 +21,7 @@ layer_0/tile_data = PackedInt32Array(786433, 65536, 0, 786434, 65536, 0, 786435,
 position = Vector2(202, 180)
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
-position = Vector2(342, 191)
+position = Vector2(347, 114)
 
 [node name="UI" type="Node" parent="."]
 process_mode = 3
@@ -63,5 +63,7 @@ offset_bottom = 120.0
 
 [node name="Pops" parent="." instance=ExtResource("9_uc16t")]
 visibility_layer = 2
-position = Vector2(92, 158)
+position = Vector2(94, 109)
 scale = Vector2(0.528007, 0.528007)
+collision_layer = 2
+collision_mask = 2

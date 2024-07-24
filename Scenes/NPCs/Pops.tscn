@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://6rgw7hbko8s"]
+[gd_scene load_steps=58 format=3 uid="uid://6rgw7hbko8s"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Pops.cs" id="1_1hgnf"]
 [ext_resource type="Texture2D" uid="uid://dx28gfnd8w0a3" path="res://Assets/sprites/Traders/craftpix-net-922426-free-city-trader-character-sprite-sheets-pixel-art/Trader_1/Approval.png" id="1_jueu2"]
@@ -374,7 +374,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5b1i"]
 size = Vector2(166, 72)
 
-[node name="Pops" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fqhx"]
+size = Vector2(26, 67)
+
+[node name="Pops" type="CharacterBody2D"]
 z_index = -1
 script = ExtResource("1_1hgnf")
 
@@ -392,3 +395,7 @@ shape = SubResource("RectangleShape2D_k5b1i")
 [node name="Tick" type="Timer" parent="."]
 wait_time = 10.836
 autostart = true
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 29.5)
+shape = SubResource("RectangleShape2D_1fqhx")

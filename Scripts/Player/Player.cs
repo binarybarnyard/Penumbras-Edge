@@ -1,7 +1,7 @@
+using gamejam15.Scripts.Classes;
 using Godot;
-using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : CharacterBody
 {
 	// Stats
 	[Export]
@@ -11,17 +11,13 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int AttackDamage = 1;
 
-	// Movement
-	public Vector2 _velocity = Vector2.Zero;
-	public float Speed = 300.0f;
+	[Export]
+	public float Speed = 185.0f;
 	public float JumpVelocity = -400.0f;
 
 	[Signal]
 	public delegate void HealthChangedEventHandler(int currentHealth, int totalHealth);
 	public event HealthChangedEventHandler HealthChangedEvent;
-
-	// Environment
-	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	// Objects
 	public StateMachine fsm;
@@ -33,12 +29,9 @@ public partial class Player : CharacterBody2D
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
-	public void GravityForce(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		if (!IsOnFloor())
-		{
-			_velocity.Y += Gravity * (float)delta;
-		}
+		base._PhysicsProcess(delta);
 	}
 
 	public void TakeDamage(int damage)

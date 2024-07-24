@@ -1,8 +1,7 @@
+using gamejam15.Scripts.Classes;
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
 
-public partial class Pops : Node
+public partial class Pops : CharacterBody
 {
     // Implementing the first non-hostile npc
     // R-G Tests:
@@ -65,13 +64,17 @@ public partial class Pops : Node
             animatedSprite2D.Play("idle1");
             playerOverlapping = true;
         }
+        else
+        {
+            playerOverlapping = false;
+        }
     }
 
     private void AnimationCycle()
     {
         // Randomize the idle animation
         // let the last animation play out before changing
-        if (animationPlayed)
+        if (animationPlayed && !playerOverlapping)
         {
             var random = new RandomNumberGenerator();
             random.Randomize();
