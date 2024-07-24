@@ -17,7 +17,6 @@ layer_0/tile_data = PackedInt32Array(786433, 65536, 0, 786434, 65536, 0, 786435,
 
 [node name="Player" parent="." instance=ExtResource("2_nv68y")]
 position = Vector2(202, 180)
-Sanity = 0.0
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
 position = Vector2(342, 191)

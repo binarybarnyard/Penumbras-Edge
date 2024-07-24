@@ -3,6 +3,8 @@ using System;
 
 public partial class PlayerHit : State
 {
+	[Export] public PackedScene DropScene {get; set; }
+
 	protected Player Player { get; private set; }
 	protected AnimatedSprite2D AnimatedSprite { get; private set; }
 
@@ -25,6 +27,9 @@ public partial class PlayerHit : State
 
 		// Start iframe timer
 		Player.IFrameTimer.Start();
+
+		// Spawn darkness if insane
+		HitWhileInsane();
 
 		// Displace
 		DisplacingForce(100);
@@ -89,5 +94,26 @@ public partial class PlayerHit : State
 
 		Player._velocity.Y -= force;
 		Player._velocity.X += random.RandiRange(-10, 10);
+	}
+
+	public void HitWhileInsane()
+	{
+		// Check if the DropScene is set
+		if (DropScene != null && Player.Sanity == 0)
+		{
+			// Instance the scene
+			Node2D dropInstance = (Node2D)DropScene.Instantiate();
+
+			// Set the position of the drop instance slightly above the current position
+			dropInstance.Position = Player.GlobalPosition + new Vector2(0, -30); // Adjust the Y value as needed
+
+			// Use call_deferred to add the instance to the scene tree
+			CallDeferred(nameof(AddChildToParent), dropInstance);
+		}
+	}
+
+	private void AddChildToParent(Node2D dropInstance)
+	{
+		GetParent().AddChild(dropInstance);
 	}
 }

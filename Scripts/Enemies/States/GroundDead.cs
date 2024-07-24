@@ -34,6 +34,9 @@ public partial class GroundDead : State
 		ThreatZone.GetNode<CollisionShape2D>("Threat").CallDeferred("set_disabled", true);
 		Enemy.CollisionLayer = 0;
 		Enemy.CollisionMask = 0;
+		
+		// Call OnKilled to instantiate the drop scene
+		Enemy.OnKilled();
 	}
 
 	public override void Exit()

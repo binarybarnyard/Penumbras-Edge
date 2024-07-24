@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cef0urt032aqd"]
+[gd_scene load_steps=10 format=3 uid="uid://cef0urt032aqd"]
 
 [ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="1_pqes0"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerIdle.cs" id="2_om11x"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.cs" id="6_wkxqe"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerHit.cs" id="7_3v84y"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerDead.cs" id="8_6j4ke"]
+[ext_resource type="PackedScene" uid="uid://csmd6t50sssqr" path="res://Scenes/Enemies/ShadowPlayer.tscn" id="8_l2khw"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_pqes0")
@@ -30,6 +31,7 @@ script = ExtResource("6_wkxqe")
 
 [node name="PlayerHit" type="Node" parent="."]
 script = ExtResource("7_3v84y")
+DropScene = ExtResource("8_l2khw")
 
 [node name="PlayerDead" type="Node" parent="."]
 script = ExtResource("8_6j4ke")
