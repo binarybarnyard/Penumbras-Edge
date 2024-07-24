@@ -1,7 +1,7 @@
 [gd_scene load_steps=41 format=3 uid="uid://cyka3f0bldk4q"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_qx2n6"]
-[ext_resource type="Texture2D" uid="uid://dvcxqfuqtahi0" path="res://Assets/sprites/knight.png" id="2_bptn7"]
+[ext_resource type="Texture2D" uid="uid://dys1e20ocd53t" path="res://Assets/sprites/knight.png" id="2_bptn7"]
 [ext_resource type="PackedScene" uid="uid://cef0urt032aqd" path="res://Scenes/StateMachines/PlayerStateMachine.tscn" id="2_vhq0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io7ii"]

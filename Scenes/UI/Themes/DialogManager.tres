@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bfu8hvannyve6"]
+
+[ext_resource type="FontFile" uid="uid://t0d44yo43rsq" path="res://Assets/fonts/Pixel_NES.otf" id="1_cp24k"]
+
+[resource]
+default_font = ExtResource("1_cp24k")

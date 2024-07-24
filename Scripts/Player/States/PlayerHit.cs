@@ -56,23 +56,10 @@ public partial class PlayerHit : State
 
 	public override void PhysicsUpdate(double delta)
 	{
-		// Gravity
-		GravityForce(delta);
-
 		// Movement
 		HandleMovement();
-		
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
-		Player.MoveAndSlide();
-	}
-
-	public void GravityForce(double delta)
-	{
-		if (!Player.IsOnFloor())
-		{
-			Player._velocity.Y += Player.Gravity * (float)delta;
-		}
 	}
 
 	public void HandleMovement()

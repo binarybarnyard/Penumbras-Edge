@@ -1,21 +1,15 @@
+using gamejam15.Scripts.Classes;
 using Godot;
-using System;
 
-public partial class GroundEnemy : CharacterBody2D
+public partial class GroundEnemy : CharacterBody
 {
     [Export] public PackedScene DropScene {get; set; }
 
     // Stats
-	public int Damage = 1;
-	public int HitPoints = 2;
-
-	// Movement
-	public Vector2 _velocity = Vector2.Zero;
-	public float Speed = 50.0f;
-	public float JumpVelocity = -100.0f;
-
-	// Environment
-	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    public int Damage = 1;
+    public int HitPoints = 2;
+    public float Speed = 50.0f;
+    public float JumpVelocity = -100.0f;
 
     // Nodes
     public StateMachine fsm;
@@ -66,15 +60,15 @@ public partial class GroundEnemy : CharacterBody2D
         fsm.TransitionTo("GroundHit");
     }
 
-	public virtual void ApplyDamage(Node body)
-	{
+    public virtual void ApplyDamage(Node body)
+    {
 
-		if (body is Player Player)
-		{
+        if (body is Player Player)
+        {
             GD.Print("Ground enemy! Ouch! Damage: " + Damage);
-			Player.TakeDamage(Damage);
-		}
-	}
+            Player.TakeDamage(Damage);
+        }
+    }
 
     public virtual void StartChase(Node body)
     {
@@ -92,12 +86,4 @@ public partial class GroundEnemy : CharacterBody2D
             fsm.TransitionTo("GroundIdle");
         }
     }
-
-    public void GravityForce(double delta)
-	{
-		if (!IsOnFloor())
-		{
-			_velocity.Y += Gravity * (float)delta;
-		}
-	}
 }
