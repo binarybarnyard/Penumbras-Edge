@@ -1,0 +1,191 @@
+[gd_scene load_steps=14 format=3 uid="uid://cgkt7ixtg1omg"]
+
+[ext_resource type="Theme" uid="uid://bfu8hvannyve6" path="res://Scenes/UI/Themes/DialogManager.tres" id="1_7j41r"]
+[ext_resource type="Script" path="res://Scripts/Classes/Interface/Dialog/DialogPlayer.cs" id="1_jnkj4"]
+[ext_resource type="Texture2D" uid="uid://djsbks1wkooby" path="res://Scenes/UI/Themes/bwb-gradient-2d.tres" id="3_l8q01"]
+
+[sub_resource type="Gradient" id="Gradient_qnhc2"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7uhwd"]
+gradient = SubResource("Gradient_qnhc2")
+
+[sub_resource type="Gradient" id="Gradient_ot2ua"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c3bw6"]
+gradient = SubResource("Gradient_ot2ua")
+fill_to = Vector2(0.952991, 0.136752)
+
+[sub_resource type="Gradient" id="Gradient_padgy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_epnkq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0mbcq"]
+invert = true
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_padgy")
+noise = SubResource("FastNoiseLite_epnkq")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8sr0d"]
+diffuse_texture = SubResource("GradientTexture1D_7uhwd")
+normal_texture = SubResource("GradientTexture2D_c3bw6")
+specular_texture = SubResource("NoiseTexture2D_0mbcq")
+specular_color = Color(0.266295, 0.255928, 0.298863, 1)
+texture_filter = 3
+texture_repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_qp7wi"]
+interpolation_mode = 2
+interpolation_color_space = 2
+colors = PackedColorArray(0.0745098, 0.054902, 0.0470588, 0.733333, 0.0666667, 0.0352941, 0.235294, 0.494118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m1xkf"]
+gradient = SubResource("Gradient_qp7wi")
+
+[node name="DialogPlayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_jnkj4")
+
+[node name="Borders" type="Node" parent="."]
+
+[node name="BorderLeft" type="TextureRect" parent="Borders"]
+z_index = -1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -28.0
+offset_right = 44.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+texture = ExtResource("3_l8q01")
+expand_mode = 1
+
+[node name="BorderLeft2" type="TextureRect" parent="Borders"]
+z_index = -1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_top = -28.0
+offset_right = 260.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+texture = ExtResource("3_l8q01")
+expand_mode = 1
+
+[node name="BorderBottom" type="TextureRect" parent="Borders"]
+z_index = -1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -36.0
+offset_right = 132.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+texture = ExtResource("3_l8q01")
+
+[node name="BorderBottom2" type="TextureRect" parent="Borders"]
+z_index = -1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -172.0
+offset_right = 132.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+texture = ExtResource("3_l8q01")
+
+[node name="Name" type="Node" parent="."]
+
+[node name="NameBackground" type="TextureRect" parent="Name"]
+z_index = -2
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -164.0
+offset_right = 132.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+texture = SubResource("CanvasTexture_8sr0d")
+
+[node name="NameLabel" type="Label" parent="Name"]
+offset_left = 451.0
+offset_top = 160.0
+offset_right = 656.0
+offset_bottom = 183.0
+theme = ExtResource("1_7j41r")
+text = "Speaker's Name:"
+
+[node name="Dialog" type="Node" parent="."]
+
+[node name="DialogBackground" type="TextureRect" parent="Dialog"]
+z_index = -1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -140.0
+offset_right = 132.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+texture = SubResource("GradientTexture1D_m1xkf")
+
+[node name="DialogLabel" type="Label" parent="Dialog"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -132.0
+offset_right = 120.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_7j41r")
+text = "This is some text to show autowrap"
+autowrap_mode = 2

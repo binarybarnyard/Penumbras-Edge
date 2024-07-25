@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cyka3f0bldk4q"]
+[gd_scene load_steps=42 format=3 uid="uid://cyka3f0bldk4q"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_qx2n6"]
 [ext_resource type="Texture2D" uid="uid://dys1e20ocd53t" path="res://Assets/sprites/knight.png" id="2_bptn7"]
@@ -286,6 +286,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3lns"]
 size = Vector2(11, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrw1w"]
+size = Vector2(11, 19)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -1)
 script = ExtResource("1_qx2n6")
@@ -316,5 +319,13 @@ one_shot = true
 [node name="PlayerBody" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_a3lns")
+
+[node name="DialogInteractionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogInteractionArea"]
+position = Vector2(-0.5, 2.5)
+shape = SubResource("RectangleShape2D_vrw1w")
 
 [connection signal="timeout" from="iFrame" to="." method="OnIFrameTimeout"]
