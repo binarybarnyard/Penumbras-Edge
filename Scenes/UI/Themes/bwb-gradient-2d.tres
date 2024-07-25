@@ -1,0 +1,9 @@
+[gd_resource type="GradientTexture2D" load_steps=2 format=3 uid="uid://djsbks1wkooby"]
+
+[ext_resource type="Gradient" uid="uid://cnkpkgd11o774" path="res://Scenes/UI/Themes/black-white-black-gradient.tres" id="1_e53wj"]
+
+[resource]
+gradient = ExtResource("1_e53wj")
+height = 10
+fill_from = Vector2(0.495726, 0)
+fill_to = Vector2(0.529915, 1)

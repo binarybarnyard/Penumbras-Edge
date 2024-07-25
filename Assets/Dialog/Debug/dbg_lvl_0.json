@@ -1,0 +1,12 @@
+{
+	"pops": [
+		{
+			"Name": "Pops",
+			"Dialog": [
+				"Stay a while and listen!",
+				"Nice to meet you, stranger!",
+				"I'm the one who knocks!"
+			]
+		}
+	]
+}
