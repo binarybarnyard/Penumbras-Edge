@@ -34,7 +34,6 @@ public partial class Player : CharacterBody
 
 	public void AdjustSanity()
 	{
-		GD.Print(Sanity);
 		// FIXME: Not a fan of this arrangement
 		// Regenerate sanity if at full HP
 		if (HitPoints == TotalHitPoints && Sanity < MaxSanity)
