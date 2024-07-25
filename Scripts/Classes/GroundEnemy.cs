@@ -27,7 +27,7 @@ public partial class GroundEnemy : CharacterBody
         DamageZone.Connect("body_entered", new Callable(this, nameof(ApplyDamage)));
         ThreatZone.Connect("body_exited", new Callable(this, nameof(EndChase)));
         ThreatZone.Connect("body_entered", new Callable(this, nameof(StartChase)));
-    }
+    } 
 
     public virtual void TakeDamage(int _receivedDamage)
     {

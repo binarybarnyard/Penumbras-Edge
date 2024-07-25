@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=14 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
@@ -6,9 +6,15 @@
 [ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
 [ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
 [ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
+[ext_resource type="PackedScene" uid="uid://b3tkeuei14rd1" path="res://Scenes/Environment/Lantern.tscn" id="7_clxpk"]
 [ext_resource type="Script" path="res://Scripts/Interface/CharacterScreen.cs" id="7_im1xq"]
 [ext_resource type="PackedScene" uid="uid://cmaci8w28lscu" path="res://Scenes/Timers/GlobalTick.tscn" id="8_xvgru"]
 [ext_resource type="PackedScene" uid="uid://6rgw7hbko8s" path="res://Scenes/NPCs/Pops.tscn" id="9_uc16t"]
+[ext_resource type="PackedScene" uid="uid://c6madrpa1nj03" path="res://Scenes/UI/Dialog/DialogArea.tscn" id="10_l8ptw"]
+[ext_resource type="PackedScene" uid="uid://cgkt7ixtg1omg" path="res://Scenes/UI/Dialog/DialogPlayer.tscn" id="11_itwv7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ciw"]
+size = Vector2(88, 37)
 
 [node name="MainScene" type="Node2D"]
 
@@ -59,6 +65,12 @@ offset_top = 97.0
 offset_right = 49.0
 offset_bottom = 120.0
 
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.525101, 0.525101, 0.525101, 1)
+
+[node name="Lantern" parent="." instance=ExtResource("7_clxpk")]
+position = Vector2(148, 184)
+
 [node name="GlobalTick" parent="." instance=ExtResource("8_xvgru")]
 
 [node name="Pops" parent="." instance=ExtResource("9_uc16t")]
@@ -67,3 +79,16 @@ position = Vector2(104, 158)
 scale = Vector2(0.528007, 0.528007)
 collision_layer = 2
 collision_mask = 2
+
+[node name="DialogAreaPops" parent="." instance=ExtResource("10_l8ptw")]
+position = Vector2(201, 183)
+DialogKey = "pops"
+
+[node name="CollisionShape2D" parent="DialogAreaPops" index="0"]
+position = Vector2(-97, -10.5)
+shape = SubResource("RectangleShape2D_s3ciw")
+
+[node name="DialogPlayer" parent="." instance=ExtResource("11_itwv7")]
+SceneTextFile = "res://Assets/Dialog/Debug/dbg_lvl_0.json"
+
+[editable path="DialogAreaPops"]

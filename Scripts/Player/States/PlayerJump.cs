@@ -45,10 +45,16 @@ public partial class PlayerJump : State
 		{
 			fsm.TransitionTo("PlayerAttack");
 		}
+        
+        // Sanity
+        Player.AdjustSanity();
 	}
 
 	public override void PhysicsUpdate(double delta)
 	{
+        // Gravity
+        Player.GravityForce(delta);
+
 		// Left/right direction
 		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
 
@@ -64,6 +70,6 @@ public partial class PlayerJump : State
 
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
-
+        Player.MoveAndSlide();
 	}
 }

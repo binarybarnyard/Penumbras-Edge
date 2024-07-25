@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6e6lx44gm60k"]
+
+[ext_resource type="Script" path="res://Scripts/StateMachine.cs" id="1_d7wxv"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/ShadowChase.cs" id="2_fursd"]
+[ext_resource type="Script" path="res://Scripts/Enemies/States/ShadowSpawn.cs" id="3_sldt6"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_d7wxv")
+InitialState = NodePath("ShadowSpawn")
+
+[node name="ShadowChase" type="Node" parent="."]
+script = ExtResource("2_fursd")
+
+[node name="ShadowSpawn" type="Node" parent="."]
+script = ExtResource("3_sldt6")
