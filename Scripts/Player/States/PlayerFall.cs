@@ -49,6 +49,9 @@ public partial class PlayerFall : State
 		{
 			fsm.TransitionTo("PlayerAttack");
 		}
+
+        // Sanity
+        Player.AdjustSanity();
 	}
 	
 	public override void PhysicsUpdate(double delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=14 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
 [ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
 [ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
+[ext_resource type="PackedScene" uid="uid://b3tkeuei14rd1" path="res://Scenes/Environment/Lantern.tscn" id="7_clxpk"]
 [ext_resource type="Script" path="res://Scripts/Interface/CharacterScreen.cs" id="7_im1xq"]
 [ext_resource type="PackedScene" uid="uid://cmaci8w28lscu" path="res://Scenes/Timers/GlobalTick.tscn" id="8_xvgru"]
 [ext_resource type="PackedScene" uid="uid://6rgw7hbko8s" path="res://Scenes/NPCs/Pops.tscn" id="9_uc16t"]
@@ -63,6 +64,12 @@ offset_left = 9.0
 offset_top = 97.0
 offset_right = 49.0
 offset_bottom = 120.0
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.525101, 0.525101, 0.525101, 1)
+
+[node name="Lantern" parent="." instance=ExtResource("7_clxpk")]
+position = Vector2(148, 184)
 
 [node name="GlobalTick" parent="." instance=ExtResource("8_xvgru")]
 
