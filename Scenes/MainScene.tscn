@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=11 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
@@ -46,12 +46,6 @@ offset_right = 224.0
 offset_bottom = 73.0
 script = ExtResource("7_6vdid")
 
-[node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.525101, 0.525101, 0.525101, 1)
-
-[node name="Lantern" parent="." instance=ExtResource("7_clxpk")]
-position = Vector2(148, 184)
-
 [node name="CharacterScreen" type="PopupMenu" parent="UI/Canvas"]
 initial_position = 2
 size = Vector2i(300, 300)
@@ -65,6 +59,12 @@ offset_left = 9.0
 offset_top = 97.0
 offset_right = 49.0
 offset_bottom = 120.0
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.525101, 0.525101, 0.525101, 1)
+
+[node name="Lantern" parent="." instance=ExtResource("7_clxpk")]
+position = Vector2(148, 184)
 
 [node name="GlobalTick" parent="." instance=ExtResource("8_xvgru")]
 

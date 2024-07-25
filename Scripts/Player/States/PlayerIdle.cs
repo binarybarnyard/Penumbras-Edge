@@ -18,7 +18,7 @@ public partial class PlayerIdle : State
 		AnimatedSprite.Play("idle");
 
         // No moving allowed
-		Player._velocity = Vector2.Zero;
+		Player.Velocity = Vector2.Zero;
 
         // I am numb inside
         CheckForDeath();

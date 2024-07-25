@@ -3,8 +3,6 @@ using Godot;
 
 public partial class GroundEnemy : CharacterBody
 {
-    [Export] public PackedScene DropScene {get; set; }
-
     // Stats
     public int Damage = 1;
     public int HitPoints = 2;
@@ -30,27 +28,6 @@ public partial class GroundEnemy : CharacterBody
         ThreatZone.Connect("body_exited", new Callable(this, nameof(EndChase)));
         ThreatZone.Connect("body_entered", new Callable(this, nameof(StartChase)));
     } 
-
-    public void OnKilled()
-    {
-        // Check if the DropScene is set
-        if (DropScene != null)
-        {
-            // Instance the scene
-            Node2D dropInstance = (Node2D)DropScene.Instantiate();
-
-            // Set the position of the drop instance slightly above the current position
-            dropInstance.Position = GlobalPosition + new Vector2(0, -15); // Adjust the Y value as needed
-
-            // Use call_deferred to add the instance to the scene tree
-            CallDeferred(nameof(AddChildToParent), dropInstance);
-        }
-    }
-
-    private void AddChildToParent(Node2D dropInstance)
-    {
-        GetParent().GetParent().AddChild(dropInstance);
-    }
 
     public virtual void TakeDamage(int _receivedDamage)
     {

@@ -9,12 +9,13 @@ public partial class Player : CharacterBody
 	[Export] public int AttackDamage = 1;
 	[Export] public double Sanity = 100;
 	[Export] public double MaxSanity = 100;
+	[Export] public double SanityAdjustRate = 0.01;
 
 	// Statuses
 	public bool Lit = false;
 
-	[Export]
-	public float Speed = 185.0f;
+	// Movement
+	[Export] public float Speed = 185.0f;
 	public float JumpVelocity = -400.0f;
 
 	[Signal]
@@ -31,16 +32,20 @@ public partial class Player : CharacterBody
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
-		base._PhysicsProcess(delta);
-	}
-
 	public void AdjustSanity()
 	{
+		GD.Print(Sanity);
+		// FIXME: Not a fan of this arrangement
+		// Regenerate sanity if at full HP
+		if (HitPoints == TotalHitPoints && Sanity < MaxSanity)
+		{
+			Sanity += SanityAdjustRate / 4;
+		}
+
+		// Light conditions
 		if (Lit && Sanity < MaxSanity)
 		{
-			Sanity += 0.01;
+			Sanity += SanityAdjustRate;
 		}
 		else if (Lit)
 		{
@@ -48,7 +53,7 @@ public partial class Player : CharacterBody
 		}
 		else if (!Lit && Sanity > 0)
 		{
-			Sanity -= 0.005;
+			Sanity -= SanityAdjustRate / 2;
 		}
 		else
 		{

@@ -56,10 +56,15 @@ public partial class PlayerHit : State
 
 	public override void PhysicsUpdate(double delta)
 	{
+		// Gravity
+		Player.GravityForce(delta);
+
 		// Movement
 		HandleMovement();
+
 		// Apply velocity and move
 		Player.Velocity = Player._velocity;
+		Player.MoveAndSlide();
 	}
 
 	public void HandleMovement()
