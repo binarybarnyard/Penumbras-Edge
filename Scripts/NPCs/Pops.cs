@@ -12,10 +12,10 @@ public partial class Pops : CharacterBody
     // [Passed] - NPC shifts idle animations randomly
     // [Req Changed] - NPC changes to an idle animation when player is near
     // [Req Changed] - NPC naturally returns to idle when the player leaves the area
-    // [Failed] - NPC has a dialogue box that appears when the player is near
-    // [Failed] - Player can interact with the NPC to trigger a console response
-    // [Failed] - Player interaction causes a dialogue box to appear
-    // [Failed] - Player interaction causes the NPC to change to a talking animation
+    // [Passed] - NPC has a dialogue box that appears when the player is near
+    // [Passed] - Player can interact with the NPC to trigger a console response
+    // [Passed] - Player interaction causes a dialogue box to appear
+    // [Req Changed] - Player interaction causes the NPC to change to a talking animation
     // [Failed] - NPC changes something about the player (Starting with adding a heart to the player)
 
     // public variables
