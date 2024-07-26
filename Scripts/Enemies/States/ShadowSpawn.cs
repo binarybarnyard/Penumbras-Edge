@@ -12,9 +12,6 @@ public partial class ShadowSpawn : State
 	protected CpuParticles2D _implosion { get; private set; }
 	protected GpuParticles2D _explosion { get; private set; }
 
-	// Variables
-	private Vector2 _playerPosition;
-
 	public override void _Ready()
 	{
 		// Nodes

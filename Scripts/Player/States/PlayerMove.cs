@@ -48,6 +48,10 @@ public partial class PlayerMove : State
 
 	public override void PhysicsUpdate(double delta)
 	{
+        // Gravity
+        Player.GravityForce(delta);
+
+        // Left/right direction
 		var input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
 
 		if (input != 0)

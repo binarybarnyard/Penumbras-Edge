@@ -3,9 +3,6 @@ using Godot;
 
 public partial class Shadow : CharacterBody
 {
-	// Stats
-	[Export] public float Speed = 200f;
-
 	// Nodes
 	protected Shadow _shadow { get; private set; }
 	protected AnimatedSprite2D AnimatedSprite { get; private set; }
@@ -16,5 +13,15 @@ public partial class Shadow : CharacterBody
 	{
 		base._Ready();
 		fsm = GetNode<StateMachine>("StateMachine");
+	}
+
+	public override void TakeDamage(int _receivedDamage)
+	{
+		HitPoints -= _receivedDamage;
+
+		if (HitPoints <= 0)
+		{
+			fsm.TransitionTo("ShadowDead");
+		}
 	}
 }
