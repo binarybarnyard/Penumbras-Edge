@@ -9,15 +9,15 @@ public partial class DialogArea : Area2D
 
 	public override void _Input(InputEvent @event)
 	{
-        if (areaActive && @event.IsActionPressed("attack"))
-        {
-            if (SignalBus.Instance == null)
-            {
-                GD.PrintErr("Error: SignalBus instance is null.");
-                return;
-            }
-            SignalBus.EmitDisplayDialogEvent(DialogKey);
-        }
+		if (areaActive && @event.IsActionPressed("attack"))
+		{
+			if (SignalBus.Instance == null)
+			{
+				GD.PrintErr("Error: SignalBus instance is null.");
+				return;
+			}
+			SignalBus.EmitDisplayDialogEvent(DialogKey);
+		}
 	}
 
 	public void _on_DialogArea_area_entered(Node body)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://csmd6t50sssqr"]
+[gd_scene load_steps=52 format=3 uid="uid://csmd6t50sssqr"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Shadow.cs" id="1_n8mpf"]
 [ext_resource type="Texture2D" uid="uid://dvcxqfuqtahi0" path="res://Assets/sprites/knight.png" id="2_tlupr"]
@@ -325,7 +325,13 @@ offsets = PackedFloat32Array(0.426667, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.0156863)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h5l6w"]
-radius = 218.021
+radius = 666.108
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxh3a"]
+size = Vector2(13, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_twcxv"]
+radius = 86.0
 
 [node name="Shadow" type="CharacterBody2D"]
 z_index = -1
@@ -353,12 +359,12 @@ emitting = false
 amount = 75
 process_material = SubResource("ParticleProcessMaterial_tsbec")
 texture = ExtResource("3_lkl11")
-lifetime = 3.0
+lifetime = 1.6
 one_shot = true
 explosiveness = 1.0
 collision_base_size = 2.0
 trail_enabled = true
-trail_lifetime = 1.0
+trail_lifetime = 0.25
 
 [node name="Implosion" type="CPUParticles2D" parent="."]
 z_index = 1
@@ -387,9 +393,35 @@ script = ExtResource("4_pvrcd")
 wait_time = 5.0
 one_shot = true
 
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [node name="StateMachine" parent="." instance=ExtResource("5_6vm0n")]
 
 [node name="ThreatZone" type="Area2D" parent="."]
 
 [node name="Threat" type="CollisionShape2D" parent="ThreatZone"]
 shape = SubResource("CircleShape2D_h5l6w")
+debug_color = Color(0, 0, 0, 0.42)
+
+[node name="DamageZone" type="Area2D" parent="."]
+
+[node name="Damage" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_nxh3a")
+debug_color = Color(0.999527, 0, 0.11018, 0.42)
+
+[node name="LogicZone" type="Area2D" parent="."]
+
+[node name="TurnAround" type="CollisionShape2D" parent="LogicZone"]
+shape = SubResource("CircleShape2D_twcxv")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-10, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(10, 0)
+collision_mask = 2
+hit_from_inside = true
