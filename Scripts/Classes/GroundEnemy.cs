@@ -4,10 +4,8 @@ using Godot;
 public partial class GroundEnemy : CharacterBody
 {
     // Stats
-    public int Damage = 1;
-    public int HitPoints = 2;
-    public float Speed = 50.0f;
-    public float JumpVelocity = -100.0f;
+    public new float Speed = 50.0f;
+    public new float JumpVelocity = -100.0f;
 
     // Nodes
     public StateMachine fsm;
@@ -29,7 +27,7 @@ public partial class GroundEnemy : CharacterBody
         ThreatZone.Connect("body_entered", new Callable(this, nameof(StartChase)));
     } 
 
-    public virtual void TakeDamage(int _receivedDamage)
+    public override void TakeDamage(int _receivedDamage)
     {
         HitPoints -= _receivedDamage;
         GD.Print(HitPoints);

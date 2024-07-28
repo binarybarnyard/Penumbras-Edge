@@ -1,3 +1,4 @@
+using gamejam15.Scripts.Classes;
 using Godot;
 using System;
 
@@ -88,7 +89,7 @@ public partial class PlayerAttack : State
 		GD.Print(body.Name);
 
 		// TODO: Include other enemy classes
-		if (body is GroundEnemy Enemy)
+		if (body is CharacterBody Enemy)
 		{
 			if (Player.Sanity == 0)
 			{
@@ -106,11 +107,11 @@ public partial class PlayerAttack : State
 	{
 		if (AnimatedSprite.FlipH)
 		{
-			AttackArea.Position = new Vector2(-16f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(-30f, AttackArea.Position.Y);
 		}
 		else
 		{
-			AttackArea.Position = new Vector2(16f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(30f, AttackArea.Position.Y);
 		}
 	}
 
