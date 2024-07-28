@@ -1,16 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://j1d4lecclv4v"]
+[gd_scene load_steps=12 format=3 uid="uid://j1d4lecclv4v"]
 
 [ext_resource type="TileSet" uid="uid://dbtdtmqaswmkb" path="res://Assets/Tilesets/metal_snow_tileset.tres" id="1_x2djs"]
 [ext_resource type="PackedScene" uid="uid://cyka3f0bldk4q" path="res://Scenes/Player.tscn" id="2_nv68y"]
 [ext_resource type="PackedScene" uid="uid://co52guer2yshi" path="res://Scenes/Slime.tscn" id="3_3cf6h"]
-[ext_resource type="Script" path="res://Scripts/Interface/UI.cs" id="4_ftpqy"]
-[ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="5_n4o0p"]
-[ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="7_6vdid"]
 [ext_resource type="PackedScene" uid="uid://b3tkeuei14rd1" path="res://Scenes/Environment/Lantern.tscn" id="7_clxpk"]
-[ext_resource type="Script" path="res://Scripts/Interface/CharacterScreen.cs" id="7_im1xq"]
 [ext_resource type="PackedScene" uid="uid://cmaci8w28lscu" path="res://Scenes/Timers/GlobalTick.tscn" id="8_xvgru"]
 [ext_resource type="PackedScene" uid="uid://6rgw7hbko8s" path="res://Scenes/NPCs/Pops.tscn" id="9_uc16t"]
 [ext_resource type="PackedScene" uid="uid://c6madrpa1nj03" path="res://Scenes/UI/Dialog/DialogArea.tscn" id="10_l8ptw"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/UI.tscn" id="10_vyw4n"]
 [ext_resource type="PackedScene" uid="uid://cgkt7ixtg1omg" path="res://Scenes/UI/Dialog/DialogPlayer.tscn" id="11_itwv7"]
 [ext_resource type="PackedScene" uid="uid://csmd6t50sssqr" path="res://Scenes/Enemies/Shadow.tscn" id="13_db4fw"]
 
@@ -29,43 +26,6 @@ position = Vector2(202, 180)
 
 [node name="Slime" parent="." instance=ExtResource("3_3cf6h")]
 position = Vector2(468, 191)
-
-[node name="UI" type="Node" parent="."]
-process_mode = 3
-script = ExtResource("4_ftpqy")
-
-[node name="Canvas" type="CanvasLayer" parent="UI"]
-process_mode = 3
-
-[node name="OptionsMenu" type="PopupMenu" parent="UI/Canvas"]
-process_mode = 3
-initial_position = 1
-size = Vector2i(107, 100)
-visible = true
-allow_search = false
-script = ExtResource("5_n4o0p")
-
-[node name="HealthContainer" type="HFlowContainer" parent="UI/Canvas"]
-offset_left = 38.0
-offset_top = 33.0
-offset_right = 224.0
-offset_bottom = 73.0
-script = ExtResource("7_6vdid")
-metadata/_edit_use_anchors_ = true
-
-[node name="CharacterScreen" type="PopupMenu" parent="UI/Canvas"]
-initial_position = 2
-size = Vector2i(300, 300)
-visible = true
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
-script = ExtResource("7_im1xq")
-
-[node name="HpLabel" type="Label" parent="UI/Canvas/CharacterScreen"]
-offset_left = 9.0
-offset_top = 97.0
-offset_right = 49.0
-offset_bottom = 120.0
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 color = Color(0.525101, 0.525101, 0.525101, 1)
@@ -95,5 +55,7 @@ SceneTextFile = "res://Assets/Dialog/Debug/dbg_lvl_0.json"
 
 [node name="Shadow" parent="." instance=ExtResource("13_db4fw")]
 position = Vector2(315, 120)
+
+[node name="Ui" parent="." instance=ExtResource("10_vyw4n")]
 
 [editable path="DialogAreaPops"]

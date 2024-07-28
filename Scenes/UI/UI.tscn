@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bggvyh6bwoeuw"]
+
+[ext_resource type="Script" path="res://Scripts/Interface/Modals/OptionsMenu.cs" id="1_cp1fs"]
+[ext_resource type="Script" path="res://Scripts/Interface/HealthContainer.cs" id="2_0hwpd"]
+[ext_resource type="Script" path="res://Scripts/Interface/CharacterScreen.cs" id="3_xgs0v"]
+
+[node name="Ui" type="Node"]
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="OptionsMenu" type="PopupMenu" parent="Canvas"]
+process_mode = 3
+initial_position = 1
+size = Vector2i(107, 100)
+visible = true
+allow_search = false
+script = ExtResource("1_cp1fs")
+
+[node name="HealthContainer" type="HFlowContainer" parent="Canvas"]
+offset_left = 38.0
+offset_top = 33.0
+offset_right = 224.0
+offset_bottom = 73.0
+script = ExtResource("2_0hwpd")
+metadata/_edit_use_anchors_ = true
+
+[node name="CharacterScreen" type="PopupMenu" parent="Canvas"]
+initial_position = 2
+size = Vector2i(300, 300)
+visible = true
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+script = ExtResource("3_xgs0v")
+
+[node name="HpLabel" type="Label" parent="Canvas/CharacterScreen"]
+offset_left = 9.0
+offset_top = 97.0
+offset_right = 49.0
+offset_bottom = 120.0
