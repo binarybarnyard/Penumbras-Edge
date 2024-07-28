@@ -4,15 +4,18 @@ using Godot;
 public partial class Player : CharacterBody
 {
 	// Stats
-	[Export]
-	public int HitPoints = 5;
-	[Export]
-	public int TotalHitPoints { get; internal set; } = 5;
-	[Export]
-	public int AttackDamage = 1;
+	[Export] public int HitPoints = 5;
+	[Export] public int TotalHitPoints { get; internal set; } = 5;
+	[Export] public int AttackDamage = 1;
+	[Export] public double Sanity = 100;
+	[Export] public double MaxSanity = 100;
+	[Export] public double SanityAdjustRate = 0.01;
 
-	[Export]
-	public float Speed = 185.0f;
+	// Statuses
+	public bool Lit = false;
+
+	// Movement
+	[Export] public float Speed = 185.0f;
 	public float JumpVelocity = -400.0f;
 
 	[Signal]
@@ -29,13 +32,41 @@ public partial class Player : CharacterBody
 		IFrameTimer = GetNode<Timer>("iFrame");
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public void AdjustSanity()
 	{
-		base._PhysicsProcess(delta);
+		// FIXME: Not a fan of this arrangement
+		// Regenerate sanity if at full HP
+		if (HitPoints == TotalHitPoints && Sanity < MaxSanity)
+		{
+			Sanity += SanityAdjustRate / 4;
+		}
+
+		// Light conditions
+		if (Lit && Sanity < MaxSanity)
+		{
+			Sanity += SanityAdjustRate;
+		}
+		else if (Lit)
+		{
+			Sanity = MaxSanity;
+		}
+		else if (!Lit && Sanity > 0)
+		{
+			Sanity -= SanityAdjustRate / 2;
+		}
+		else
+		{
+			Sanity = 0;
+		}
 	}
 
 	public void TakeDamage(int damage)
 	{
+		if (Sanity == 0)
+		{
+			damage = damage * 2;
+		}
+
 		HitPoints -= damage;
 		HealthChangedEvent?.Invoke(HitPoints, TotalHitPoints);
 		fsm.TransitionTo("PlayerHit");

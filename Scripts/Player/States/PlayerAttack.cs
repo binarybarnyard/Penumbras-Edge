@@ -90,8 +90,15 @@ public partial class PlayerAttack : State
 		// TODO: Include other enemy classes
 		if (body is GroundEnemy Enemy)
 		{
-			Enemy.TakeDamage(Player.AttackDamage);
-			GD.Print("Enemy damage taken");
+			if (Player.Sanity == 0)
+			{
+				Enemy.TakeDamage(Player.AttackDamage * 2);
+			}
+			else
+			{
+				Enemy.TakeDamage(Player.AttackDamage);
+			}
+
 		}
 	}
 
