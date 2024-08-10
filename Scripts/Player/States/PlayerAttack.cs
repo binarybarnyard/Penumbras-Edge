@@ -107,11 +107,11 @@ public partial class PlayerAttack : State
 	{
 		if (AnimatedSprite.FlipH)
 		{
-			AttackArea.Position = new Vector2(-30f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(-28f, AttackArea.Position.Y);
 		}
 		else
 		{
-			AttackArea.Position = new Vector2(30f, AttackArea.Position.Y);
+			AttackArea.Position = new Vector2(28f, AttackArea.Position.Y);
 		}
 	}
 
