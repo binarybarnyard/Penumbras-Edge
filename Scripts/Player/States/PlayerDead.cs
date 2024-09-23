@@ -4,12 +4,12 @@ using System;
 public partial class PlayerDead : State
 {
 	protected Player Player { get; private set; }
-	protected AnimatedSprite2D AnimatedSprite { get; private set; }
+	protected AnimationPlayer AnimationPlayer { get; private set; }
 
 	public override void _Ready()
 	{
 		Player = GetParent().GetParent<Player>();
-		AnimatedSprite = Player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		AnimationPlayer = Player.GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	public override void Enter()
@@ -24,9 +24,7 @@ public partial class PlayerDead : State
 		Player._velocity.X = 0;
 
 		// Animation
-  		AnimatedSprite.Play("dead");
-		AnimatedSprite.SpriteFrames.SetAnimationLoop("dead", false);
-
+		AnimationPlayer.Play("dead");
 	}
 
 	public override void Exit()
